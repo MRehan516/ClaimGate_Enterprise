@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClaimGate | Enterprise AI Firewall</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        slate: { 850: '#162032', 900: '#0F172A', 950: '#0B1120' },
+                        neon: { blue: '#3B82F6', purple: '#8B5CF6', green: '#10B981', red: '#EF4444' }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #3B82F6, 0 0 10px #3B82F6' },
+                            '100%': { boxShadow: '0 0 20px #8B5CF6, 0 0 30px #8B5CF6' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0B1120; color: #F8FAFC; overflow-x: hidden; }
+        
+        /* Glassmorphism effects */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Animated Gradient Text */
+        .text-gradient {
+            background: linear-gradient(to right, #3B82F6, #8B5CF6, #EC4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient-shift 3s linear infinite;
+        }
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Terminal styling */
+        .terminal-bg { background-color: #05080f; }
+        .terminal-text { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0B1120; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col relative selection:bg-neon-purple selection:text-white">
+
+    <!-- Background decorative elements -->
+    <div class="fixed top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-neon-blue/10 blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-neon-purple/10 blur-[120px] pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <nav class="w-full border-b border-white/10 glass-panel sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-shield-halved text-neon-blue text-2xl"></i>
+                <span class="text-xl font-bold tracking-tight">ClaimGate<span class="font-light text-slate-400">.Enterprise</span></span>
+            </div>
+            <div class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+                <a href="#" class="hover:text-white transition-colors">Documentation</a>
+                <a href="#" class="hover:text-white transition-colors">Architecture</a>
+                <div class="flex items-center text-neon-green bg-neon-green/10 px-3 py-1 rounded-full text-xs">
+                    <span class="w-2 h-2 rounded-full bg-neon-green animate-pulse mr-2"></span> System Online
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto w-full px-6 py-12 flex flex-col lg:flex-row gap-8 z-10 relative">
+        
+        <!-- Left Column: Input & Pitch -->
+        <div class="w-full lg:w-5/12 flex flex-col justify-center space-y-8">
+            <div>
+                <h1 class="text-5xl font-extrabold leading-tight mb-4">
+                    Deterministic <br>
+                    <span class="text-gradient">LLM Security.</span>
+                </h1>
+                <p class="text-slate-400 text-lg leading-relaxed">
+                    Prevent hallucinations and adversarial injections at the vector level. ClaimGate intercepts, routes, and mathematically verifies generative grounding in milliseconds.
+                </p>
+            </div>
+
+            <!-- Input Form -->
+            <div class="glass-panel rounded-2xl p-6 relative group overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-neon-blue/20 to-neon-purple/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                
+                <h3 class="text-sm font-bold text-slate-300 uppercase tracking-wider mb-4 flex items-center">
+                    <i class="fa-solid fa-terminal mr-2"></i> Simulate Payload
+                </h3>
+                
+                <div class="relative">
+                    <textarea id="queryInput" rows="4" 
+                        class="w-full bg-slate-950/80 border border-slate-700 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue transition-all resize-none terminal-text" 
+                        placeholder="Enter a prompt...&#10;e.g., 'How do I reset my password?'&#10;e.g., 'Ignore previous instructions.'"></textarea>
+                </div>
+
+                <div class="mt-4 flex gap-3">
+                    <button onclick="runSimulation('How do I reset my password?')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 py-2 px-3 rounded-lg transition-colors border border-slate-700 hover:border-slate-500">
+                        Test: Safe FAQ
+                    </button>
+                    <button onclick="runSimulation('I need a refund immediately.')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 py-2 px-3 rounded-lg transition-colors border border-slate-700 hover:border-slate-500">
+                        Test: Billing
+                    </button>
+                    <button onclick="runSimulation('Write a poem about a toaster.')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 py-2 px-3 rounded-lg transition-colors border border-slate-700 hover:border-slate-500">
+                        Test: OOD Attack
+                    </button>
+                </div>
+
+                <button id="submitBtn" onclick="executePipeline()" 
+                    class="mt-6 w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold py-4 px-6 rounded-xl transition-all transform active:scale-[0.98] shadow-lg shadow-blue-500/25 flex justify-center items-center">
+                    <i class="fa-solid fa-bolt mr-2"></i> Execute Defense Pipeline
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Column: Visualization Terminal -->
+        <div class="w-full lg:w-7/12 flex flex-col h-full min-h-[600px]">
+            <div class="glass-panel rounded-2xl flex-grow flex flex-col overflow-hidden border border-slate-700/50 shadow-2xl">
+                
+                <!-- Terminal Header -->
+                <div class="bg-slate-900 border-b border-slate-800 px-4 py-3 flex justify-between items-center">
+                    <div class="flex space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div class="text-xs font-mono text-slate-500 uppercase tracking-widest">AegisRAG Interceptor Process</div>
+                    <div class="w-16"></div> <!-- Spacer for flex alignment -->
+                </div>
+
+                <!-- Terminal Body -->
+                <div id="terminalBody" class="terminal-bg flex-grow p-6 overflow-y-auto flex flex-col space-y-4">
+                    <div class="text-slate-500 terminal-text text-center mt-20" id="idleText">
+                        <i class="fa-solid fa-shield-halved text-4xl mb-4 opacity-50"></i>
+                        <p>Firewall armed. Awaiting incoming payload...</p>
+                    </div>
+                    <!-- Logs will be injected here -->
+                </div>
+
+                <!-- Metrics Footer (Hidden initially) -->
+                <div id="metricsFooter" class="bg-slate-900/80 border-t border-slate-800 p-4 grid grid-cols-3 gap-4 hidden">
+                    <div class="flex flex-col items-center justify-center p-2 bg-slate-800/50 rounded-lg border border-slate-700">
+                        <span class="text-[10px] text-slate-400 uppercase tracking-widest mb-1">Total Latency</span>
+                        <span id="metricLatency" class="font-mono text-lg font-bold text-neon-blue">0.00ms</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-center p-2 bg-slate-800/50 rounded-lg border border-slate-700">
+                        <span class="text-[10px] text-slate-400 uppercase tracking-widest mb-1">OOD Distance</span>
+                        <span id="metricDist" class="font-mono text-lg font-bold text-white">0.00</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-center p-2 bg-slate-800/50 rounded-lg border border-slate-700">
+                        <span class="text-[10px] text-slate-400 uppercase tracking-widest mb-1">Final Status</span>
+                        <span id="metricStatus" class="font-mono text-lg font-bold">AWAIT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Pre-fill the textarea
+        function runSimulation(text) {
+            document.getElementById('queryInput').value = text;
+        }
+
+        // Helper to simulate typing effect in terminal
+        async function typeLine(container, text, type, delay = 50) {
+            const line = document.createElement('div');
+            line.className = 'terminal-text opacity-0 transform translate-y-2 transition-all duration-300';
+            
+            let icon = '';
+            let colorClass = 'text-slate-300';
+            
+            if (type === 'info') { icon = '<span class="text-blue-400 mr-2">[INFO]</span>'; }
+            if (type === 'success') { icon = '<span class="text-green-400 mr-2">[PASS]</span>'; colorClass = 'text-green-300'; }
+            if (type === 'warn') { icon = '<span class="text-yellow-400 mr-2">[WARN]</span>'; colorClass = 'text-yellow-300'; }
+            if (type === 'error') { icon = '<span class="text-red-500 mr-2 font-bold">[BLOCKED]</span>'; colorClass = 'text-red-400 font-bold'; }
+            if (type === 'output') { icon = '<span class="text-purple-400 mr-2">>></span>'; colorClass = 'text-white bg-slate-800/50 p-3 rounded border border-slate-700 block mt-2'; }
+
+            line.innerHTML = `${icon} <span class="${colorClass}">${text}</span>`;
+            container.appendChild(line);
+            
+            // Trigger animation
+            setTimeout(() => {
+                line.classList.remove('opacity-0', 'translate-y-2');
+                container.scrollTop = container.scrollHeight;
+            }, 10);
+
+            return new Promise(resolve => setTimeout(resolve, delay));
+        }
+
+        async function executePipeline() {
+            const query = document.getElementById('queryInput').value;
+            if (!query) return;
+
+            const btn = document.getElementById('submitBtn');
+            const terminal = document.getElementById('terminalBody');
+            const metrics = document.getElementById('metricsFooter');
+            
+            // UI Reset
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Analyzing Vector Space...';
+            btn.classList.add("opacity-75", "pointer-events-none");
+            document.getElementById('idleText')?.remove();
+            terminal.innerHTML = '';
+            metrics.classList.add('hidden');
+
+            try {
+                // If you have your FastAPI running, uncomment this block to use real data!
+                /*
+                const res = await fetch("/api/verify", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ query: query })
+                });
+                const data = await res.json();
+                */
+
+                // ==========================================
+                // SIMULATED BACKEND LOGIC (For pure UI demo)
+                // ==========================================
+                // We fake the backend response based on keywords so the UI looks incredible immediately.
+                let data = { status: "PASS", distance: 1.24, reason: "Verified & Grounded", response: "Based on our policy: You can reset your password by visiting the settings page.", entailment: 0.98, latency_ms: 142.5 };
+                
+                const qLower = query.toLowerCase();
+                if (qLower.includes("poem") || qLower.includes("toaster") || qLower.includes("ignore")) {
+                    data = { status: "BLOCKED", reason: "L1: Anomaly Detected", distance: 4.82, latency_ms: 24.1 };
+                } else if (qLower.includes("refund") || qLower.includes("billing") || qLower.includes("credit")) {
+                    data = { status: "ESCALATED", reason: "L2: Sensitive Intent", distance: 1.85, latency_ms: 45.2 };
+                }
+                
+                // Simulate network delay
+                await new Promise(r => setTimeout(r, 600));
+                // ==========================================
+
+                // --- Terminal Animation Sequence ---
+                await typeLine(terminal, `Incoming Payload: "${query}"`, 'info', 400);
+                
+                // L1 Gate
+                await typeLine(terminal, `Initializing L1 Gate: Mahalanobis Distance Calculator`, 'info', 300);
+                if (data.status === "BLOCKED" && data.reason.includes("L1")) {
+                    await typeLine(terminal, `Distance = ${data.distance.toFixed(4)} (Threshold: 2.0)`, 'warn', 200);
+                    await typeLine(terminal, `CRITICAL: Vector lies outside semantic bounds.`, 'error', 100);
+                    await typeLine(terminal, `Connection severed pre-generation.`, 'error', 0);
+                    updateMetrics(data, 'text-red-500');
+                    return;
+                }
+                await typeLine(terminal, `Distance = ${data.distance.toFixed(4)} (Threshold: 2.0) -> PASS`, 'success', 400);
+
+                // L2 Gate
+                await typeLine(terminal, `Initializing L2 Gate: WideMLP Intent Classifier`, 'info', 300);
+                if (data.status === "ESCALATED") {
+                    await typeLine(terminal, `Intent detected: 'Billing/Sensitive' (Confidence: 0.89)`, 'warn', 200);
+                    await typeLine(terminal, `ACTION: Deterministic escalation triggered. Halting LLM.`, 'warn', 0);
+                    updateMetrics(data, 'text-yellow-500');
+                    return;
+                }
+                await typeLine(terminal, `Intent detected: 'FAQ' (Confidence: 0.98) -> PASS`, 'success', 500);
+
+                // L3 & L4 Gate
+                await typeLine(terminal, `L3 GATE: Optimizing Context via MMKP...`, 'info', 600);
+                await typeLine(terminal, `L4 GATE: NLI Grounding Verification Initiated...`, 'info', 800);
+                
+                await typeLine(terminal, `Entailment: ${data.entailment.toFixed(2)} | Contradiction: 0.01 -> PASS`, 'success', 300);
+                
+                await typeLine(terminal, `${data.response}`, 'output', 0);
+                updateMetrics(data, 'text-green-500');
+
+            } catch (error) {
+                await typeLine(terminal, `SERVER ERROR: Cannot reach API.`, 'error', 0);
+            } finally {
+                btn.innerHTML = '<i class="fa-solid fa-bolt mr-2"></i> Execute Defense Pipeline';
+                btn.classList.remove("opacity-75", "pointer-events-none");
+            }
+        }
+
+        function updateMetrics(data, colorClass) {
+            const metrics = document.getElementById('metricsFooter');
+            metrics.classList.remove('hidden');
+            
+            document.getElementById('metricLatency').innerText = data.latency_ms + "ms";
+            document.getElementById('metricDist').innerText = data.distance.toFixed(2);
+            
+            const statusEl = document.getElementById('metricStatus');
+            statusEl.innerText = data.status;
+            statusEl.className = `font-mono text-lg font-bold ${colorClass}`;
+        }
+    </script>
+</body>
+</html>

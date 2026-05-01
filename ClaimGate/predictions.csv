@@ -1,0 +1,4 @@
+ticket_id,prediction
+T001,Based on our policy: HackerRank supports Python 3.8 and above in the standard coding environment. Users cannot share HackerRank account credentials. Doing so results in a ban.
+T002,ESCALATE: High-risk intent 'Billing' requires human authorization.
+T003,ESCALATE: Intent ambiguity detected. Cannot safely resolve.
